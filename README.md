@@ -1,4 +1,4 @@
-# football-webapplication
+# tournament-webapplication
 
 
 ### Installation
