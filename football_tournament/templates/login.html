@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+    <style type="text/css">
+        .container{
+            margin: 50px 10em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mt-2">
+                <a href="/" class="btn btn-primary float-right">Home</a>
+            </div>
+        </div>
+        <div class="row>">
+            <div class="col-4 offset-3">
+                <div><h2 class="text-center" style="color: red;">Admin Login</h2></div>
+                <div class="col-12">
+                    {% if messages %}
+                    <div class="messages alert alert-danger response-fade text-center">
+                        {% for message in messages %}
+                        <span {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</span>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+                <form action="" method="POST">
+                    {% csrf_token %}
+
+                    <input type="text" 
+                      id="{{ form.username.id_for_label }}" 
+                      name="{{ form.username.html_name }}" 
+                      value="{% if form.username.value %}{{ form.username.value }}{% endif %}" 
+                      placeholder="{{ form.username.label }}"
+                      class="fadeIn text-center form-control second{% if form.username.errors %} is-invalid{% endif %}">
+                    <br>
+                    <input type="password" 
+                      id="password" 
+                      name="{{ form.password.html_name }}" 
+                      value="{% if form.password.value %}{{ form.password.value }}{% endif %}" 
+                      placeholder=" {{ form.password.label }}"
+                      class="fadeIn text-center form-control third {% if form.password.errors %} is-invalid{% endif %}">
+                      
+                    <div class="form-group py-2">
+                        <input type="submit" class="fadeIn form-control fourth btn btn-primary" value="Login">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 mt-5">
+            <h1 class="text-center">Registered Teams</h1>
+            <a href="/admin-logout" class="btn btn-danger ml-2 float-right">Logout</a>
+            <a href="/match-fixture" class="btn btn-primary float-right">View Fixture</a>
+        </div><br>
+        <div class="col-12 table-responsive mt-5">
+            <table class="table table-bordered">
+                <thead class="table-dark"> 
+                    <tr>
+                        <th>#</th>
+                        <th>Team Name</th>
+                        <th width="20%">Details</th>
+
+                    </tr>
+                </thead>
+                <tbody class="table-sm">
+                	{% if teams_count > 0 %}
+                    {% for team in teams %}
+                    <tr id="team{{team.id}}">
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ team.team_name }}</td>
+                        <td><a href="/admin/team-details/{{team.id}}" class="btn btn-info">View</a></td>
+                    </tr>
+                    {% endfor %}
+                    {% else %}
+                    <tr><td colspan="4" class="text-center text-danger"><b>No team registered yet</b></td></tr>
+                    {% endif %}
+                </tbody>
+            </table>
+            <div class="row">
+                <div class="col-12 text-center">
+		            {% if teams%}
+		            <div class="">
+		                <span class="step-links">
+		                    {% if teams.has_previous %}
+		                        <a href="?page=1">&laquo; first</a>
+		                        <a href="?page={{ teams.previous_page_number }}">previous</a>
+		                    {% endif %}
+		            
+		                    <span class="current">
+		                        Page {{ teams.number }} of {{ teams.paginator.num_pages }}.
+		                    </span>
+		            
+		                    {% if teams.has_next %}
+		                        <a href="?page={{ teams.next_page_number }}">next</a>
+		                        <a href="?page={{ teams.paginator.num_pages }}">last &raquo;</a>
+		                    {% endif %}
+		                </span>
+		            </div>
+		            {% endif %}
+		        </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+crossorigin="anonymous"></script>
+
+</body>
+</html>
